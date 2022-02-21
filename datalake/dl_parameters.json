@@ -1,0 +1,65 @@
+{   
+    "resourceGroupName": "AZU-DATAANALYTICSAC-RG-PRD",
+    "dataLakeName": "azudataanalyticsacdlprd",
+    "containers":[
+        {
+            "containerName": "tst",
+            "folders": ["bronze", "silver", "gold", "germanium"]
+        },
+        {
+            "containerName": "prd",
+            "folders": ["bronze", "silver", "gold", "germanium"]
+        }
+    ],
+    "entities": [
+        {
+            "entityName": "MNG-AZU-Governance-DataAnalyticsAC",
+            "entityId": "f062fab7-f90d-4f12-9507-f58f09a89de7",
+            "accessList": {
+                "bronze": "r-x",
+                "silver": "r-x",
+                "gold": "r-x",
+                "germanium": "rwx"
+            }
+        },
+        {
+            "entityName": "MNG-AZU-DataAnalysis-DataAnalyticsAC",
+            "entityId": "dff0c2c9-8a40-48d1-a699-65391f3514f5",
+            "accessList": {
+                "bronze": "r-x",
+                "silver": "r-x",
+                "gold": "r-x",
+                "germanium": "rwx"
+            }
+        },
+        {
+            "entityName": "MNG-AZU-DataScience-DataAnalyticsAC",
+            "entityId": "ac0bd8bf-d4cd-4984-92ed-804475b1d643",
+            "accessList": {
+                "bronze": "r-x",
+                "silver": "r-x",
+                "gold": "r-x",
+                "germanium": "rwx"
+            }
+        },
+        {
+            "entityName": "MNG-AZU-DataEngineer-DataAnalyticsAC",
+            "entityId": "f4afd79e-c993-4b3e-94e5-a44b5021b6e7",
+            "accessList": {
+                "bronze": "rwx",
+                "silver": "rwx",
+                "gold": "rwx",
+                "germanium": "rwx"
+            }
+        },
+        {
+            "entityName": "srv-trendminerac-prd",
+            "entityId": "95aedc5a-e91a-4ee7-ba5f-ce593644aaeb",
+            "accessList": {
+                "bronze": "r-x",
+                "silver": "r-x",
+                "gold": "r-x",
+                "germanium": "---"
+            }
+        }]
+}
