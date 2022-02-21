@@ -1,0 +1,44 @@
+
+trigger:
+- main
+
+jobs:
+- job: Publish
+  displayName: Publish
+  pool:
+    vmImage: windows-2019
+  steps:
+  - checkout: self
+    clean: False
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish artifact: drop'
+    inputs:
+      PathtoPublish: 'datalake'
+      ArtifactName: 'drop'
+      publishLocation: 'Container'
+- job: Execute
+  displayName: Execute
+  pool:
+    vmImage: windows-2019
+  steps:
+  - task: AzurePowerShell@5
+    displayName: 'Create Data Lake Filesystem'
+    inputs:
+      azureSubscription: '<<Service Connection Name>>'
+      ScriptPath: '$(System.DefaultWorkingDirectory)/datalake-pipeline/drop/create_datalake_filesystem.ps1'
+      azurePowerShellVersion: LatestVersion
+      workingDirectory: '$(System.DefaultWorkingDirectory)/datalake-pipeline/drop'
+  - task: AzurePowerShell@5
+    displayName: 'Assign Mask Permissions'
+    inputs:
+      azureSubscription: '<<Service Connection Name>>'
+      ScriptPath: '$(System.DefaultWorkingDirectory)/datalake-pipeline/drop/assign_mask_datalake.ps1'
+      azurePowerShellVersion: LatestVersion
+      workingDirectory: '$(System.DefaultWorkingDirectory)/datalake-pipeline/drop'
+  - task: AzurePowerShell@5
+      displayName: 'Assign ACL Permissions'
+      inputs:
+        azureSubscription: '<<Service Connection Name>>'
+        ScriptPath: '$(System.DefaultWorkingDirectory)/datalake-pipeline/drop/assign_acl_datalake.ps1'
+        azurePowerShellVersion: LatestVersion
+        workingDirectory: '$(System.DefaultWorkingDirectory)/datalake-pipeline/drop'
